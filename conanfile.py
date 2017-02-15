@@ -2,7 +2,7 @@ from conans import ConanFile, ConfigureEnvironment
 
 class ConanCointClp(ConanFile):
     name = "coin-clp"
-    version = "0.1"
+    version = "1.16"
     settings = "os", "compiler", "build_type", "arch"
     url = "https://projects.coin-or.org/Clp"
     license = "Eclipse Public License"

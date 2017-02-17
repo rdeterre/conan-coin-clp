@@ -9,7 +9,7 @@ class ConanCointClp(ConanFile):
     generators = "cmake"
 
     def source(self):
-        self.run("svn co --trust-server-cert https://projects.coin-or.org/svn/Clp/stable/1.16 coin-clp")
+        self.run("svn co --non-interactive --trust-server-cert https://projects.coin-or.org/svn/Clp/stable/1.16 coin-clp")
 
     def build(self):
         env = ConfigureEnvironment(self)

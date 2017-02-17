@@ -15,15 +15,14 @@ class ConanCointClp(ConanFile):
         env = ConfigureEnvironment(self)
         self.run("cd coin-clp && {} ./configure".format(env.command_line_env))
         self.run("cd coin-clp && {} make".format(env.command_line_env))
+        self.run("cd coin-clp && {} make".format(env.command_line_env))
+        self.run("cd coin-clp && make install DESTDIR=`pwd`/tmp")
 
     def package(self):
-        self.copy("*.hpp", dst="include", src="coin-clp/Osi/src")
-        self.copy("*.hpp", dst="include", src="coin-clp/Clp/src")
-        self.copy("*.hpp", dst="include", src="coin-clp/CoinUtils/src")
-        self.copy("libOsi.so*", dst="lib", src="coin-clp/Osi/src/Osi/.libs")
-        self.copy("libClp.so*", dst="lib", src="coin-clp/Clp/src/.libs")
-        self.copy("libClpSolver.so*", dst="lib", src="coin-clp/Clp/src/.libs")
-        self.copy("libCoinUtils.so*", dst="lib", src="coin-clp/CoinUtils/src/.libs")
+        self.copy("*.hpp", dst="include/coin", src="coin-clp/tmp", keep_path=False)
+        self.copy("*.h",   dst="include/coin", src="coin-clp/tmp", keep_path=False)
+        self.copy("*.so*", dst="lib", src="coin-clp/tmp", keep_path=False)
 
     def package_info(self):
         self.cpp_info.libs = ["Osi", "Clp", "ClpSolver", "CoinUtils"]
+        self.cpp_info.includedirs = ["include/coin"]
